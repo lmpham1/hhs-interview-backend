@@ -1,7 +1,7 @@
 // src/routes/api/getMany.js
 
 const DataService = require('../../model/data');
-const { createSuccessResponse } = require('../../response');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 
 /**
  * Get a list of nurses

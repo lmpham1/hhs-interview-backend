@@ -1,7 +1,7 @@
 // src/routes/api/getById.js
 
 const DataService = require('../../model/data');
-const { createSuccessResponse } = require('../../response');
+const { createSuccessResponse, createErrorResponse } = require('../../response');
 
 /**
  * Get a single nurse record using their id

@@ -13,7 +13,7 @@ module.exports = function () {
                 WHERE 1 = 1`;
 
         if (options.name) {
-          sql += ` AND (first_name = $name OR last_name = $name)`;
+          sql += ` AND (instr(first_name, $name) > 0 OR instr(last_name, $name) > 0)`;
         }
 
         if (options.ward) {
@@ -24,6 +24,8 @@ module.exports = function () {
           $name: options.name,
           $ward: options.ward
         };
+
+        console.log(params);
 
         db.all(sql, params, (err, rows) => {
           if (err) {
