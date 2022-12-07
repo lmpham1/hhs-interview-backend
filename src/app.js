@@ -3,7 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-
+const bodyParser = require('body-parser');
 const logger = require('./logger');
 const pino = require('pino-http')({
   // Use our default logger instance, which is already configured
@@ -14,6 +14,9 @@ const { createErrorResponse } = require('./response');
 
 // Create an express app instance we can use to attach middleware and HTTP routes
 const app = express();
+
+// Add support for incoming JSON entities
+app.use(bodyParser.json());
 
 // Use logging middleware
 app.use(pino);

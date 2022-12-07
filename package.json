@@ -1,5 +1,5 @@
 {
-  "name": "HHS_Interview_API",
+  "name": "hhs_interview_api",
   "version": "1.0.0",
   "description": "A web application for HHS interview",
   "main": "index.js",
@@ -11,7 +11,9 @@
     "debug": "cross-env LOG_LEVEL=debug nodemon --inspect=0.0.0.0:9229 ./src/index.js --watch src"
   },
   "dependencies": {
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.29.0",
     "express": "^4.18.2",
@@ -19,10 +21,12 @@
     "pino": "^8.7.0",
     "pino-http": "^8.2.1",
     "pino-pretty": "^9.1.1",
+    "sqlite3": "^5.1.2",
     "stoppable": "^1.1.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.0"
   }
 }
