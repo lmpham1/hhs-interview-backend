@@ -13,25 +13,35 @@ module.exports = function () {
                 WHERE 1 = 1`;
 
         if (options.name) {
-          sql += ` AND (instr(first_name, $name) > 0 OR instr(last_name, $name) > 0)`;
+          sql += ` AND (instr(LOWER(first_name), LOWER($name)) > 0 OR instr(LOWER(last_name), LOWER($name)) > 0)`;
         }
 
         if (options.ward) {
-          sql += ` AND ward = $ward`;
+          const wardOptions = options.ward.split(",");
+          const parameterizedWardOptions = wardOptions.join("' OR ward LIKE '");
+          sql += ` AND (ward LIKE '${parameterizedWardOptions}')`;
         }
+
+        //console.log(sql);
 
         let params = {
           $name: options.name,
-          $ward: options.ward
         };
-
-        console.log(params);
 
         db.all(sql, params, (err, rows) => {
           if (err) {
             reject(err);
           }
-          resolve(rows);
+          //console.log(rows.length);
+          const page = options.page ? options.page : 0;
+          const results = rows.slice(
+            page * 10,
+            page * 10 + 10 > rows.length ? rows.length : page * 10 + 10
+          );
+          resolve({
+            nurses: results,
+            noOfPages: Math.ceil(rows.length / 10),
+          });
         });
 
         // close the database connection
